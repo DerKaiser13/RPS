@@ -1,56 +1,38 @@
-const computerChoiceDisplay = document.getElementById('computer-choice')
-const userChoiceDisplay = document.getElementById('user-choice')
-const resultDisplay = document.getElementById('result')
-const possibleChoices = document.querySelectorAll('button')
-let userChoice
-let computerChoice
-let result
-
-possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
-    userChoice = e.target.id
-    userChoiceDisplay.innerHTML = userChoice
-    genComputerChoice()
-    getResult()
-}))
-
-function genComputerChoice(){
-    const randomNumber = Math.floor(Math.random() *3) +1
-
-    if(randomNumber === 1){
-        computerChoice = 'rock'
-    }
-    if(randomNumber === 2){
-        computerChoice = 'paper'
-    }
-    if(randomNumber === 3){
-        computerChoice = 'scissors'
-    }
-    computerChoiceDisplay.innerHTML = computerChoice
+function Rock(){
+	randomNum=Math.floor(Math.random()*3);
+		if (randomNum==0){
+			document.getElementById("Result").innerHTML="It's a Draw!";
+		}			
+		else if (randomNum==1){
+			document.getElementById("Result").innerHTML="You lose!";
+		}			
+		else{
+			document.getElementById("Result").innerHTML="You Win!";
+		}
 }
-
-function getResult(){
-    if(computerChoice === userChoice){
-        result = 'Its a draw!'
-    }
-    if(computerChoice == 'rock' && userChoice == 'paper'){
-        result = 'You win!'
-    }
-    if(computerChoice == 'rock' && userChoice == 'scissors'){
-        result = 'You lose!'
-    }
-    if(computerChoice == 'paper' && userChoice == 'scissors'){
-        result = 'You win!'
-    }
-    if(computerChoice == 'paper' && userChoice == 'rock'){
-        result = 'You lose!'
-    }
-    if(computerChoice == 'scissors' && userChoice == 'rock'){
-        result = 'You win!'
-    }
-    if(computerChoice == 'scissors' && userChoice == 'paper'){
-        result = 'You lose!'
-    }
-    resultDisplay.innerHTML = result
+		
+function Paper(){
+	randomNum=Math.floor(Math.random()*3);
+		if (randomNum==1){
+			document.getElementById("Result").innerHTML="You Win!";
+		}			
+		else if (randomNum==2){
+			document.getElementById("Result").innerHTML="It's a Draw!";
+		}			
+		else{
+			document.getElementById("Result").innerHTML="You Lose!";
+		}
+}	
+		
+function Scissors(){
+	randomNum=Math.floor(Math.random()*3);
+		if (randomNum==0){
+			document.getElementById("Result").innerHTML="You Lose!";
+		}			
+		else if (randomNum==1){
+			document.getElementById("Result").innerHTML="You Win!";
+		}			
+		else{
+			document.getElementById("Result").innerHTML="It's a Draw!";
+		}
 }
-
-
