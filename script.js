@@ -1,38 +1,61 @@
-function Rock(){
-	randomNum=Math.floor(Math.random()*3);
-		if (randomNum==0){
-			document.getElementById("Result").innerHTML="It's a Draw!";
-		}			
-		else if (randomNum==1){
-			document.getElementById("Result").innerHTML="You lose!";
-		}			
-		else{
-			document.getElementById("Result").innerHTML="You Win!";
-		}
+let attempt = 0;
+let win = false;
+let previousCompPick="none";
+
+function play(clicked_id){
+    attempt+=1;
+    var userPick = clicked_id;	
+    var compPick = pick();
+    previousCompPick = compPick;
+    var result = compare(userPick,compPick);
+    if(attempt<3){
+        if(win==false){
+            document.getElementById("demo").innerHTML+="<br>"+attempt+": The computer chose "+compPick+". "+result;
+        }
+        else if(win==true){
+            document.getElementById("demo").innerHTML+="<br>"+attempt+": The computer chose "+compPick+". "+result;
+            attempt=3;
+        }
+        
+    }
+    else if(attempt==3){
+        if(win==false){
+            document.getElementById("demo").innerHTML+="<br>"+attempt+": You chose "+userPick+". The computer chose "+compPick+". "+result;
+        }
+        else if(win==true){
+            document.getElementById("demo").innerHTML+="<br>"+attempt+": You chose "+userPick+". The computer chose "+compPick+". "+result;
+        }
+    }
 }
-		
-function Paper(){
-	randomNum=Math.floor(Math.random()*3);
-		if (randomNum==1){
-			document.getElementById("Result").innerHTML="You Win!";
-		}			
-		else if (randomNum==2){
-			document.getElementById("Result").innerHTML="It's a Draw!";
-		}			
-		else{
-			document.getElementById("Result").innerHTML="You Lose!";
-		}
-}	
-		
-function Scissors(){
-	randomNum=Math.floor(Math.random()*3);
-		if (randomNum==0){
-			document.getElementById("Result").innerHTML="You Lose!";
-		}			
-		else if (randomNum==1){
-			document.getElementById("Result").innerHTML="You Win!";
-		}			
-		else{
-			document.getElementById("Result").innerHTML="It's a Draw!";
-		}
+
+function pick(){
+	var compPick = Math.random();
+	if(compPick<0.34){
+		compPick="rock";
+	}
+	else if(compPick<0.67){ 
+		compPick="paper";
+	}
+	else{
+		compPick="scissors";
+	}
+    console.log("Comp Pick = "+compPick + ", Previous Comp Pick = "+previousCompPick);
+    if(compPick != previousCompPick){
+        return compPick;
+    }
+    else{
+        return pick();
+    }
+}
+
+function compare(userPick,compPick){
+	var result="You lose!";
+	if(userPick==compPick){
+		result="You draw!";
+	}
+	else if((userPick=="rock" && compPick=="scissors") || (userPick=="paper" && compPick=="rock") || (userPick=="scissors" && compPick=="paper")){
+		result="You win!";
+        win=true;
+	}
+	return result;
 }
